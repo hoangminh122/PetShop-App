@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dmt.chandoi.appbanhang.activity.DienThoaiActivity">
+    <android.support.v7.widget.Toolbar
+        android:background="@color/colorAccent"
+        app:titleTextColor="@android:color/black"
+        android:id="@+id/toolbar_dienthoai"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+    </android.support.v7.widget.Toolbar>
+    <ListView
+        android:background="@color/colorAccent"
+        android:id="@+id/lv_dienthoai"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+</LinearLayout>
