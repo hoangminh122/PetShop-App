@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 26, 2019 at 07:05 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.2.15
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th1 04, 2020 lúc 10:27 AM
+-- Phiên bản máy phục vụ: 10.4.6-MariaDB
+-- Phiên bản PHP: 7.1.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,41 +19,43 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_banhang`
+-- Cơ sở dữ liệu: `db_banhang`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bills`
+-- Cấu trúc bảng cho bảng `bills`
 --
 
 CREATE TABLE `bills` (
+  `check` int(1) DEFAULT 0,
   `id` int(10) UNSIGNED NOT NULL,
   `id_customer` int(11) DEFAULT NULL,
   `date_order` date DEFAULT NULL,
   `total` float DEFAULT NULL COMMENT 'tổng tiền',
   `payment` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'hình thức thanh toán',
   `note` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `bills`
+-- Đang đổ dữ liệu cho bảng `bills`
 --
 
-INSERT INTO `bills` (`id`, `id_customer`, `date_order`, `total`, `payment`, `note`, `created_at`, `updated_at`) VALUES
-(14, 14, '2017-03-23', 160000, 'COD', 'k', '2017-03-23 04:46:05', '2017-03-23 04:46:05'),
-(13, 13, '2017-03-21', 400000, 'ATM', 'Vui lòng giao hàng trước 5h', '2017-03-21 07:29:31', '2017-03-21 07:29:31'),
-(12, 12, '2017-03-21', 520000, 'COD', 'Vui lòng chuyển đúng hạn', '2017-03-21 07:20:07', '2017-03-21 07:20:07'),
-(11, 11, '2017-03-21', 420000, 'COD', 'không chú', '2017-03-21 07:16:09', '2017-03-21 07:16:09'),
-(15, 15, '2017-03-24', 220000, 'COD', 'e', '2017-03-24 07:14:32', '2017-03-24 07:14:32');
+INSERT INTO `bills` (`check`, `id`, `id_customer`, `date_order`, `total`, `payment`, `note`, `created_at`, `updated_at`) VALUES
+(1, 14, 14, '2017-03-23', 160000, 'COD', 'k', '2019-12-27 09:50:39', '2017-03-23 04:46:05'),
+(0, 13, 13, '2017-03-21', 400000, 'ATM', 'Vui lòng giao hàng trước 5h', '2017-03-21 07:29:31', '2017-03-21 07:29:31'),
+(0, 12, 12, '2017-03-21', 520000, 'COD', 'Vui lòng chuyển đúng hạn', '2017-03-21 07:20:07', '2017-03-21 07:20:07'),
+(0, 11, 11, '2017-03-21', 420000, 'COD', 'không chú', '2017-03-21 07:16:09', '2017-03-21 07:16:09'),
+(0, 15, 15, '2017-03-24', 220000, 'COD', 'e', '2017-03-24 07:14:32', '2017-03-24 07:14:32'),
+(0, 16, 0, NULL, 367000, NULL, 'DHANG tren DIEN THOAI', '2019-12-27 09:55:34', '2019-12-27 09:55:34');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bill_detail`
+-- Cấu trúc bảng cho bảng `bill_detail`
 --
 
 CREATE TABLE `bill_detail` (
@@ -62,12 +64,12 @@ CREATE TABLE `bill_detail` (
   `id_product` int(10) NOT NULL,
   `quantity` int(11) NOT NULL COMMENT 'số lượng',
   `unit_price` double NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `bill_detail`
+-- Đang đổ dữ liệu cho bảng `bill_detail`
 --
 
 INSERT INTO `bill_detail` (`id`, `id_bill`, `id_product`, `quantity`, `unit_price`, `created_at`, `updated_at`) VALUES
@@ -78,12 +80,13 @@ INSERT INTO `bill_detail` (`id`, `id_bill`, `id_product`, `quantity`, `unit_pric
 (14, 12, 60, 2, 200000, '2017-03-21 07:20:07', '2017-03-21 07:20:07'),
 (13, 12, 61, 1, 120000, '2017-03-21 07:20:07', '2017-03-21 07:20:07'),
 (12, 11, 61, 1, 120000, '2017-03-21 07:16:09', '2017-03-21 07:16:09'),
-(11, 11, 57, 2, 150000, '2017-03-21 07:16:09', '2017-03-21 07:16:09');
+(11, 11, 57, 2, 150000, '2017-03-21 07:16:09', '2017-03-21 07:16:09'),
+(19, 0, 61, 1, 367000, '2019-12-27 09:55:34', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Cấu trúc bảng cho bảng `customer`
 --
 
 CREATE TABLE `customer` (
@@ -94,12 +97,12 @@ CREATE TABLE `customer` (
   `address` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `phone_number` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `note` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `customer`
+-- Đang đổ dữ liệu cho bảng `customer`
 --
 
 INSERT INTO `customer` (`id`, `name`, `gender`, `email`, `address`, `phone_number`, `note`, `created_at`, `updated_at`) VALUES
@@ -107,12 +110,13 @@ INSERT INTO `customer` (`id`, `name`, `gender`, `email`, `address`, `phone_numbe
 (14, 'hhh', 'nam', 'huongnguyen@gmail.com', 'Lê thị riêng', '99999999999999999', 'k', '2017-03-23 04:46:05', '2017-03-23 04:46:05'),
 (13, 'Hương Hương', 'Nữ', 'huongnguyenak96@gmail.com', 'Lê Thị Riêng, Quận 1', '23456789', 'Vui lòng giao hàng trước 5h', '2017-03-21 07:29:31', '2017-03-21 07:29:31'),
 (12, 'Khoa phạm', 'Nam', 'khoapham@gmail.com', 'Lê thị riêng', '1234567890', 'Vui lòng chuyển đúng hạn', '2017-03-21 07:20:07', '2017-03-21 07:20:07'),
-(11, 'Hương Hương', 'Nữ', 'huongnguyenak96@gmail.com', 'Lê Thị Riêng, Quận 1', '234567890-', 'không chú', '2017-03-21 07:16:09', '2017-03-21 07:16:09');
+(11, 'Hương Hương', 'Nữ', 'huongnguyenak96@gmail.com', 'Lê Thị Riêng, Quận 1', '234567890-', 'không chú', '2017-03-21 07:16:09', '2017-03-21 07:16:09'),
+(16, 'oke', '', 'fgdfgdfdrertgfd', '', '154502454', '', '2019-12-27 09:55:34', '2019-12-27 09:55:34');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Cấu trúc bảng cho bảng `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -124,7 +128,7 @@ CREATE TABLE `migrations` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `news`
+-- Cấu trúc bảng cho bảng `news`
 --
 
 CREATE TABLE `news` (
@@ -132,12 +136,12 @@ CREATE TABLE `news` (
   `title` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'tiêu đề',
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'nội dung',
   `image` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'hình',
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `update_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `news`
+-- Đang đổ dữ liệu cho bảng `news`
 --
 
 INSERT INTO `news` (`id`, `title`, `content`, `image`, `create_at`, `update_at`) VALUES
@@ -150,25 +154,25 @@ INSERT INTO `news` (`id`, `title`, `content`, `image`, `create_at`, `update_at`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Cấu trúc bảng cho bảng `products`
 --
 
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_type` int(10) UNSIGNED DEFAULT NULL,
-  `description` text COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `unit_price` float DEFAULT NULL,
   `promotion_price` float DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `unit` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `new` tinyint(4) DEFAULT '0',
+  `new` tinyint(4) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `products`
+-- Đang đổ dữ liệu cho bảng `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `id_type`, `description`, `unit_price`, `promotion_price`, `image`, `unit`, `new`, `created_at`, `updated_at`) VALUES
@@ -228,7 +232,7 @@ INSERT INTO `products` (`id`, `name`, `id_type`, `description`, `unit_price`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `slide`
+-- Cấu trúc bảng cho bảng `slide`
 --
 
 CREATE TABLE `slide` (
@@ -238,7 +242,7 @@ CREATE TABLE `slide` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `slide`
+-- Đang đổ dữ liệu cho bảng `slide`
 --
 
 INSERT INTO `slide` (`id`, `link`, `image`) VALUES
@@ -250,7 +254,7 @@ INSERT INTO `slide` (`id`, `link`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `type_products`
+-- Cấu trúc bảng cho bảng `type_products`
 --
 
 CREATE TABLE `type_products` (
@@ -263,22 +267,22 @@ CREATE TABLE `type_products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `type_products`
+-- Đang đổ dữ liệu cho bảng `type_products`
 --
 
 INSERT INTO `type_products` (`id`, `name`, `description`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'Thức ăn', 'Nuôi thú cảnh là thực sự thú vui xa xỉ của những người có điều kiện khi giá của sản phẩm thức ăn nhập khẩu cho vật nuôi này hiện ở mức cao ngất ngưởng.', 'banh-man-thu-vi-nhat-1.jpg', NULL, NULL),
-(2, 'Quần áo', 'Với Những bộ quần áo thú cưng thật đẹp và đầy cá tính, chúng tôi có thể giúp bé yêu của nhà bạn tỏa sáng.', '20131108144733.jpg', '2016-10-12 02:16:15', '2016-10-13 01:38:35'),
-(3, 'Dụng cụ vệ sinh', 'Bạn luôn muốn giữ vệ sinh cho thú cưng của bạn . Hãy đến với chúng tôi.!', 'banhtraicay.jpg', '2016-10-18 00:33:33', '2016-10-15 07:25:27'),
-(4, 'y tế & Thuốc', 'Để cho thú cưng nhà bạn được khỏe mạnh. Đây chính nhà thuốc phục vụ cho bạn.', 'banhkem.jpg', '2016-10-26 03:29:19', '2016-10-26 02:22:22'),
-(5, 'Đồ chơi & Phụ kiện', 'Bnạ muốn thú cưng của bạn trở nên chuyên nghiệp. Có được những dụng cụ huấn luyện chuyên nghiệp .Hãy đến với chúng tôi.', 'crepe.jpg', '2016-10-28 04:00:00', '2016-10-27 04:00:23'),
-(6, 'Chuồng, giường, nhà, túi.', 'Một mái nhà nho nhỏ dành cho thú cưng của bạn . Hãy bắt đầu mua sắm đi nào', 'pizza.jpg', '2016-10-25 17:19:00', NULL),
-(7, 'Khác ...', '...', 'sukemdau.jpg', '2016-10-25 17:19:00', NULL);
+(1, 'Thức ăn', 'Nuôi thú cảnh là thực sự thú vui xa xỉ của những người có điều kiện khi giá của sản phẩm thức ăn nhập khẩu cho vật nuôi này hiện ở mức cao ngất ngưởng.', 'https://png.pngtree.com/png-clipart/20190517/original/pngtree-a-bowl-of-dog-food-and-cat-food-png-image_4287192.jpg', NULL, NULL),
+(2, 'Quần áo', 'Với Những bộ quần áo thú cưng thật đẹp và đầy cá tính, chúng tôi có thể giúp bé yêu của nhà bạn tỏa sáng.', 'https://png.pngtree.com/png-clipart/20190705/original/pngtree-a-brown-dog-in-clothes-png-image_4284565.jpg', '2016-10-12 02:16:15', '2016-10-13 01:38:35'),
+(3, 'Dụng cụ vệ sinh', 'Bạn luôn muốn giữ vệ sinh cho thú cưng của bạn . Hãy đến với chúng tôi.!', 'https://png.pngtree.com/png-clipart/20190921/original/pngtree-cartoon-red-brush-illustration-png-image_4741686.jpg', '2016-10-18 00:33:33', '2016-10-15 07:25:27'),
+(4, 'y tế & Thuốc', 'Để cho thú cưng nhà bạn được khỏe mạnh. Đây chính nhà thuốc phục vụ cho bạn.', 'https://png.pngtree.com/template/20190819/ourlarge/pngtree-cross-health-care-medical-logo-icon-symbol-emblem-image_294704.jpg', '2016-10-26 03:29:19', '2016-10-26 02:22:22'),
+(5, 'Đồ chơi & Phụ kiện', 'Bnạ muốn thú cưng của bạn trở nên chuyên nghiệp. Có được những dụng cụ huấn luyện chuyên nghiệp .Hãy đến với chúng tôi.', 'https://png.pngtree.com/png-clipart/20190619/original/pngtree-vector-illustration-of-a-little-boy-holding-a-bone-in-his-png-image_3999928.jpg', '2016-10-28 04:00:00', '2016-10-27 04:00:23'),
+(6, 'Chuồng, giường, nhà, túi.', 'Một mái nhà nho nhỏ dành cho thú cưng của bạn . Hãy bắt đầu mua sắm đi nào', 'https://png.pngtree.com/png-clipart/20190611/original/pngtree-vector-dog-house-png-image_2292788.jpg', '2016-10-25 17:19:00', NULL),
+(7, 'Khác ...', '...', 'https://png.pngtree.com/png-vector/20190410/ourmid/pngtree-cartoon-animal-puppy-png-image_928904.jpg', '2016-10-25 17:19:00', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -294,7 +298,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `phone`, `address`, `remember_token`, `created_at`, `updated_at`) VALUES
@@ -303,125 +307,125 @@ INSERT INTO `users` (`id`, `full_name`, `email`, `password`, `phone`, `address`,
 (8, 'hoang minh', 'hoangminh12297@gmail.com', '$2y$10$dq8FsZdfggFQvG5FNnjRqeZNKBW1EPSu.ooXbEV94ithupVvka0Ym', '0346578452', 'linh dong', NULL, '2019-12-26 09:00:40', '2019-12-26 09:00:40');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `bills`
+-- Chỉ mục cho bảng `bills`
 --
 ALTER TABLE `bills`
   ADD PRIMARY KEY (`id`),
   ADD KEY `bills_ibfk_1` (`id_customer`);
 
 --
--- Indexes for table `bill_detail`
+-- Chỉ mục cho bảng `bill_detail`
 --
 ALTER TABLE `bill_detail`
   ADD PRIMARY KEY (`id`),
   ADD KEY `bill_detail_ibfk_2` (`id_product`);
 
 --
--- Indexes for table `customer`
+-- Chỉ mục cho bảng `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `migrations`
+-- Chỉ mục cho bảng `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `news`
+-- Chỉ mục cho bảng `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `products`
+-- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `products_id_type_foreign` (`id_type`);
 
 --
--- Indexes for table `slide`
+-- Chỉ mục cho bảng `slide`
 --
 ALTER TABLE `slide`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `type_products`
+-- Chỉ mục cho bảng `type_products`
 --
 ALTER TABLE `type_products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `bills`
+-- AUTO_INCREMENT cho bảng `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `bill_detail`
+-- AUTO_INCREMENT cho bảng `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
--- AUTO_INCREMENT for table `slide`
+-- AUTO_INCREMENT cho bảng `slide`
 --
 ALTER TABLE `slide`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `type_products`
+-- AUTO_INCREMENT cho bảng `type_products`
 --
 ALTER TABLE `type_products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `products`
+-- Các ràng buộc cho bảng `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_id_type_foreign` FOREIGN KEY (`id_type`) REFERENCES `type_products` (`id`);
